@@ -19,7 +19,6 @@ function calcWinner(squares) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      alert('We have a winner!!');
       return squares[a];
     }
   }
@@ -27,45 +26,59 @@ function calcWinner(squares) {
 }
 export default function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
-  const [turn, setTurn] = useState('X');
+  const startState = Array(9).fill(null);
+  const [turn, setTurn] = useState(true);//true is X
   function handleClick(i) {
     if (squares[i]||calcWinner(squares)) {
       return;
     }
-    switch (turn) {
-      case 'X':
-        setTurn('O');
-        break;
-      case 'O':
-        setTurn('X');
-        break;
-      default:
-        break;
-    }
     const nextState = squares.slice();
-    nextState[i]=turn;
-    setSquares(nextState);
-    if (calcWinner(squares)) {
-      return;
+    if (turn) {
+      nextState[i] = 'X';
+    } else {
+      nextState[i] = 'O';
     }
+    setSquares(nextState);
+    setTurn(!turn);
   }
-
+  const winner = calcWinner(squares);
+  let status;
+  if (winner) {
+    status = "Winner: " + winner;
+  } else {
+    status = "Next player: " + (turn ? 'X' : 'O') ;
+  }
   return (
     <>
-      <div className="board-row">
-        <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-        <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-        <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
+      <div>{status}</div>
+      <div id="game">
+        <div className="board-row">
+          <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
+          <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
+          <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
+        </div>
+        <div className="board-row">
+          <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
+          <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
+          <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
+        </div>
+        <div className="board-row">
+          <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
+          <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
+          <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
+        </div>
       </div>
-      <div className="board-row">
-        <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-        <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-        <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
-      </div>
-      <div className="board-row">
-        <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-        <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-        <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
+      <div>
+        <button id="startOverBtn" onClick={() => {
+            setSquares(startState);
+            setTurn(true);
+          }} onMouseEnter={() => {
+            document.getElementById("startOverBtn").style.backgroundColor = "slategrey";
+            document.getElementById("startOverBtn").style.color = "black";
+          }} onMouseOut={() => {
+            document.getElementById("startOverBtn").style.backgroundColor = "darkslategrey";
+            document.getElementById("startOverBtn").style.color = "beige";
+          }}>Start over</button>
       </div>
     </>
   );
