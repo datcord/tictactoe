@@ -72,3 +72,11 @@
     color: beige; 
     
   }
+
+  #startOverBtn:hover {
+    margin-top: 5px;
+    background-color: slategrey;
+    border-radius: 20;
+    color: black; 
+    
+  }

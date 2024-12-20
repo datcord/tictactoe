@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-// eslint-disable-next-line react/prop-types
 function Square({ value, onSquareClick }) {
   return <button className="square" onClick={onSquareClick}>{value}</button>;
 }
@@ -27,7 +26,8 @@ function calcWinner(squares) {
 export default function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const startState = Array(9).fill(null);
-  const [turn, setTurn] = useState(true);//true is X
+  const [turn, setTurn] = useState(true); //true is X
+  
   function handleClick(i) {
     if (squares[i]||calcWinner(squares)) {
       return;
@@ -72,12 +72,6 @@ export default function Board() {
         <button id="startOverBtn" onClick={() => {
             setSquares(startState);
             setTurn(true);
-          }} onMouseEnter={() => {
-            document.getElementById("startOverBtn").style.backgroundColor = "slategrey";
-            document.getElementById("startOverBtn").style.color = "black";
-          }} onMouseOut={() => {
-            document.getElementById("startOverBtn").style.backgroundColor = "darkslategrey";
-            document.getElementById("startOverBtn").style.color = "beige";
           }}>Start over</button>
       </div>
     </>
