@@ -21,6 +21,9 @@ function calcWinner(squares) {
       return squares[a];
     }
   }
+  if (squares.every((square) => square)) {
+    return "draw";
+  }
   return null;
 }
 export default function Board() {
@@ -50,7 +53,7 @@ export default function Board() {
   }
   return (
     <>
-      <div>{status}</div>
+      <div id="status">{status}</div>
       <div id="game">
         <div className="board-row">
           <Square value={squares[0]} onSquareClick={() => handleClick(0)} />

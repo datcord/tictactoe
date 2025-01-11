@@ -1,0 +1,13 @@
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    padding: 0;
+    background-color:color-mix(in srgb, beige 75%, blue 25%);
+}
+
+h1 {
+    margin-top: 0;
+    font-size: 22px;
+    text-shadow: 2px 2px 2px darkslategrey;
+    text-align: center;
+}
