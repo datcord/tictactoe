@@ -4,7 +4,6 @@
 }
 body {
   font-family: sans-serif;
-  align-content: center;
   margin: 20px;
   justify-items: center;
   background-color: #25292e;
@@ -18,14 +17,33 @@ h1 {
 }
 
 .square {
-  color: #25292e;
+  background-color: transparent;
+  color: #fff;
+  margin: 3px;
   float: left;
   font-size: 60px;
   font-weight: bold;
   line-height: 100px;
   height: 100px;
+  border-width: 3px;
   border-radius: 20%;
   text-align: center;
+  box-shadow: 2px 3px 3px slategray;
+  width: 100px;
+}
+.square:hover {
+  background-color: transparent;
+  color: #fff;
+  margin: 3px;
+  float: left;
+  font-size: 60px;
+  font-weight: bold;
+  line-height: 100px;
+  height: 100px;
+  border-width: 3px;
+  border-radius: 20%;
+  text-align: center;
+  box-shadow: 2px 3px 3px #ffd33d;
   width: 100px;
 }
 
@@ -46,7 +64,7 @@ h1 {
   padding: 10px;
   margin-top: 5px;
   background-color: #ffd33d;
-  border-radius: 30%;
+  border-radius: 40%;
   text-shadow: 3px 3px 3px slategrey;
   color: black; 
 }
@@ -56,7 +74,7 @@ h1 {
   margin-top: 5px;
   background-color: #ffd33d;
   text-shadow: 3px 3px 3px black;
-  border-radius: 10%;
-  color: beige; 
+  border-radius: 40%;
+  color: black; 
   
 }
