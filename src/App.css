@@ -1,7 +1,10 @@
 * {
     box-sizing: border-box;
   }
-  
+  #particles {
+    z-index: -1;
+    position: absolute;
+  }
   body {
     font-family: sans-serif;
     margin: 20px;
@@ -24,7 +27,12 @@
   ul {
     padding-inline-start: 20px;
   }
-  
+  #particles canvas {
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+  }
   
   body {
     font-family: sans-serif;

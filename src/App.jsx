@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ParticlesComponent from './Particles';
 
 function Square({ value, onSquareClick }) {
   return <button className="square" onClick={onSquareClick}>{value}</button>;
@@ -51,8 +52,11 @@ export default function Board() {
   } else {
     status = "Next player: " + (turn ? 'X' : 'O') ;
   }
+  
   return (
     <>
+      <h1>TIC TAC TOE</h1>
+      <ParticlesComponent id="particles" /> 
       <div id="status">{status}</div>
       <div id="game">
         <div className="board-row">
