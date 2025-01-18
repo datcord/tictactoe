@@ -4,8 +4,9 @@
 }
 body {
   font-family: sans-serif;
+  align-content: center;
   margin: 20px;
-  padding: 0;
+  justify-items: center;
   background-color: #25292e;
 }
 
@@ -24,14 +25,11 @@ h1 {
   line-height: 100px;
   height: 100px;
   border-radius: 20%;
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
   text-align: center;
   width: 100px;
 }
 
-.board-row:after {
+.board-row {
   clear: both;
   content: '';
   display: table;
