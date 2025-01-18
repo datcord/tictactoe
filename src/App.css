@@ -1,92 +1,64 @@
-* {
-    box-sizing: border-box;
-  }
-  #particles {
-    z-index: -1;
-    position: absolute;
-  }
-  body {
-    font-family: sans-serif;
-    margin: 20px;
-    padding: 0;
-    background-color: #25292e;
-  }
-  
-  h1 {
-    color: #ffd33d;
-    margin-top: 0;
-    font-size: 40px;
-    text-shadow: 3px 3px 3px slategrey;
-  }
-  
-  
-  code {
-    font-size: 1.2em;
-  }
-  
-  ul {
-    padding-inline-start: 20px;
-  }
-  #particles canvas {
-    z-index: -1;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-  }
-  
-  body {
-    font-family: sans-serif;
-    margin: 20px;
-    padding: 0;
-  }
-  
-  .square {
-    float: left;
-    font-size: 40px;
-    font-weight: bold;
-    line-height: 80px;
-    height: 80px;
-    border-radius: 20%;
-    margin-right: -1px;
-    margin-top: -1px;
-    padding: 0;
-    text-align: center;
-    width: 80px;
-  }
-  
-  .board-row:after {
-    clear: both;
-    content: '';
-    display: table;
-  }
-  
-  #status {
-    color: aliceblue;
-    margin-bottom: 10px;
-  }
-  
-  .game {
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .game-info {
-    margin-left: 20px;
-  }
-  
-  #startOverBtn {
-    width: 50;
-    margin-top: 5px;
-    background-color: darkslategrey;
-    border-radius: 20%;
-    color: beige; 
-  }
+#particles {
+  z-index: -1;
+  position: absolute;
+}
+body {
+  font-family: sans-serif;
+  margin: 20px;
+  padding: 0;
+  background-color: #25292e;
+}
 
-  #startOverBtn:hover {
-    width: 50;
-    margin-top: 5px;
-    background-color: slategrey;
-    border-radius: 20%;
-    color: black; 
-    
-  }
+h1 {
+  color: #ffd33d;
+  margin-top: 0;
+  font-size: 50px;
+  text-shadow: 4px 4px 4px slategrey;
+}
+
+.square {
+  color: #25292e;
+  float: left;
+  font-size: 60px;
+  font-weight: bold;
+  line-height: 100px;
+  height: 100px;
+  border-radius: 20%;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 100px;
+}
+
+.board-row:after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+#status {
+  color: #ffd33d;
+  margin-bottom: 10px;
+  text-shadow: 4px 4px 4px slategrey;
+}
+
+
+#startOverBtn {
+  padding: 10px;
+  margin-top: 5px;
+  background-color: #ffd33d;
+  border-radius: 30%;
+  text-shadow: 3px 3px 3px slategrey;
+  color: black; 
+}
+
+#startOverBtn:hover {
+  padding: 10px;
+  margin-top: 5px;
+  background-color: #ffd33d;
+  text-shadow: 3px 3px 3px black;
+  border-radius: 10%;
+  color: beige; 
+  
+}
