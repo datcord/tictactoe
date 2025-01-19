@@ -4,12 +4,16 @@
 }
 body {
   font-family: sans-serif;
-  margin: 20px;
-  justify-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #25292e;
+  flex-direction: column;
+  height: 98vh;
 }
 
 h1 {
+  text-align: center;
   color: #ffd33d;
   margin-top: 0;
   font-size: 50px;
@@ -54,27 +58,25 @@ h1 {
 }
 
 #status {
+  text-align: center;
   color: #ffd33d;
   margin-bottom: 10px;
   text-shadow: 4px 4px 4px slategrey;
 }
 
-
 #startOverBtn {
+  text-align: center;
   padding: 10px;
   margin-top: 5px;
   background-color: #ffd33d;
   border-radius: 40%;
   text-shadow: 3px 3px 3px slategrey;
   color: black; 
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #startOverBtn:hover {
-  padding: 10px;
-  margin-top: 5px;
-  background-color: #ffd33d;
   text-shadow: 3px 3px 3px black;
-  border-radius: 40%;
-  color: black; 
-  
 }
