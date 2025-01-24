@@ -19,7 +19,13 @@ h1 {
   font-size: 50px;
   text-shadow: 4px 4px 4px slategrey;
 }
-
+h2 {
+  text-align: center;
+  color: #ffd33d;
+  margin-top: 0;
+  font-size: 30px;
+  text-shadow: 4px 4px 4px slategrey;
+}
 .square {
   background-color: transparent;
   color: #fff;
@@ -66,17 +72,199 @@ h1 {
 
 #startOverBtn {
   text-align: center;
-  padding: 10px;
-  margin-top: 5px;
-  background-color: #ffd33d;
-  border-radius: 40%;
-  text-shadow: 3px 3px 3px slategrey;
-  color: black; 
+  padding: 15px 30px;
+  margin-top: 20px;
+  background-color: transparent;
+  color: #ffd33d;
+  border: 3px solid #ffd33d;
+  border-radius: 20px;
+  text-shadow: 2px 2px 2px black;
+  box-shadow: 2px 3px 3px slategray;
+  transition: all 0.3s ease;
+  font-size: 20px;
+  cursor: pointer;
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
 #startOverBtn:hover {
-  text-shadow: 3px 3px 3px black;
+  background-color: #ffd33d;
+  color: black;
+  text-shadow: 2px 2px 2px slategray;
+  box-shadow: 2px 3px 3px #ffd33d;
+  transform: scale(1.05);
+}
+
+#mode-selection {
+  text-align: center;
+  margin: 20px;
+}
+
+#mode-selection button {
+  margin: 15px;
+  padding: 15px 30px;
+  font-size: 20px;
+  cursor: pointer;
+  background-color: transparent;
+  color: #ffd33d;
+  border: 3px solid #ffd33d;
+  border-radius: 20px;
+  text-shadow: 2px 2px 2px black;
+  box-shadow: 2px 3px 3px slategray;
+  transition: all 0.3s ease;
+}
+
+#mode-selection button:hover {
+  background-color: #ffd33d;
+  color: black;
+  text-shadow: 2px 2px 2px slategray;
+  box-shadow: 2px 3px 3px #ffd33d;
+  transform: scale(1.05);
+}
+
+.winner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+  animation: fadeIn 0.5s ease-in;
+  cursor: pointer;
+}
+
+.winner-text {
+  color: #ffd33d;
+  font-size: 80px;
+  font-weight: bold;
+  text-shadow: 4px 4px 4px black;
+  margin-bottom: 20px;
+  animation: dropDown 5s ease-out;
+  position: relative;
+  z-index: 2;
+}
+
+.winning-symbol {
+  color: #ffd33d;
+  font-size: 150px;
+  font-weight: bold;
+  text-shadow: 4px 4px 4px black;
+  animation: scaleUp 5s ease-out;
+  position: relative;
+  z-index: 2;
+}
+
+.click-to-continue {
+  color: #ffd33d;
+  font-size: 24px;
+  margin-top: 30px;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in 4.5s forwards;
+  text-shadow: 3px 2px 2px #25292e;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes dropDown {
+  0% {
+    transform: translateY(-200px);
+    opacity: 0;
+  }
+  10% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  90% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+  10% {
+    transform: scale(1.2);
+  }
+  20% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50%{
+    transform: scale(1);
+    opacity: 1;
+    color: #fff;
+  }
+  90% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    color: #ffd33d;
+  }
+}
+
+.flying-symbols-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.flying-symbol {
+  position: absolute;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  opacity: 0;
+  animation: fly var(--duration) ease-in-out var(--delay) infinite;
+  left: var(--start-x);
+  top: var(--start-y);
+}
+
+@keyframes fly {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: 
+      translate(
+        calc(var(--end-x) - var(--start-x)),
+        calc(var(--end-y) - var(--start-y))
+      )
+      rotate(360deg);
+    opacity: 0;
+  }
 }
