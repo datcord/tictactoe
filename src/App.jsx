@@ -55,28 +55,119 @@ export default function Board() {
   const startState = Array(9).fill(null);
   const [turn, setTurn] = useState(true); //true is X
   const [gameMode, setGameMode] = useState(null); // null = not selected, 'single' or 'multi'
+  const [difficulty, setDifficulty] = useState(null); // new state for difficulty level
   const [lastMove, setLastMove] = useState(null); // Track the last move position
   const [showWinAnimation, setShowWinAnimation] = useState(false);
 
+  // Add these new helper functions for the computer's AI
+  function getWinningMove(board, player) {
+    const lines = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8],
+      [0, 3, 6], [1, 4, 7], [2, 5, 8],
+      [0, 4, 8], [2, 4, 6]
+    ];
+
+    for (let line of lines) {
+      const [a, b, c] = line;
+      if (board[a] === player && board[b] === player && board[c] === null) return c;
+      if (board[a] === player && board[c] === player && board[b] === null) return b;
+      if (board[b] === player && board[c] === player && board[a] === null) return a;
+    }
+    return null;
+  }
+
+  function minimax(board, depth, isMaximizing) {
+    const winner = calcWinner(board);
+    if (winner === 'O') return 10 - depth;
+    if (winner === 'X') return depth - 10;
+    if (winner === 'draw') return 0;
+
+    if (isMaximizing) {
+      let bestScore = -Infinity;
+      for (let i = 0; i < 9; i++) {
+        if (!board[i]) {
+          board[i] = 'O';
+          const score = minimax(board, depth + 1, false);
+          board[i] = null;
+          bestScore = Math.max(score, bestScore);
+        }
+      }
+      return bestScore;
+    } else {
+      let bestScore = Infinity;
+      for (let i = 0; i < 9; i++) {
+        if (!board[i]) {
+          board[i] = 'X';
+          const score = minimax(board, depth + 1, true);
+          board[i] = null;
+          bestScore = Math.min(score, bestScore);
+        }
+      }
+      return bestScore;
+    }
+  }
+
+  function getBestMove(board) {
+    let bestScore = -Infinity;
+    let bestMove = null;
+
+    for (let i = 0; i < 9; i++) {
+      if (!board[i]) {
+        board[i] = 'O';
+        const score = minimax(board, 0, false);
+        board[i] = null;
+        if (score > bestScore) {
+          bestScore = score;
+          bestMove = i;
+        }
+      }
+    }
+    return bestMove;
+  }
+
   function computerMove() {
-    // Use a callback to ensure we have the latest state
     setSquares(currentSquares => {
-      // Find available moves
-      const availableMoves = currentSquares.map((square, index) => 
-        square === null ? index : null
-      ).filter(move => move !== null);
-      
-      if (availableMoves.length === 0) return currentSquares;
-      
-      // Make random move
-      const randomIndex = Math.floor(Math.random() * availableMoves.length);
-      const movePosition = availableMoves[randomIndex];
-      
+      let movePosition;
+
+      if (difficulty === 'easy') {
+        // Random move (current implementation)
+        const availableMoves = currentSquares.map((square, index) => 
+          square === null ? index : null
+        ).filter(move => move !== null);
+        
+        const randomIndex = Math.floor(Math.random() * availableMoves.length);
+        movePosition = availableMoves[randomIndex];
+      } 
+      else if (difficulty === 'medium') {
+        // First try to win, then block opponent, then random move
+        movePosition = getWinningMove(currentSquares, 'O'); // Try to win
+        
+        if (movePosition === null) {
+          movePosition = getWinningMove(currentSquares, 'X'); // Try to block
+        }
+        
+        if (movePosition === null) {
+          // Make a random move
+          const availableMoves = currentSquares.map((square, index) => 
+            square === null ? index : null
+          ).filter(move => move !== null);
+          const randomIndex = Math.floor(Math.random() * availableMoves.length);
+          movePosition = availableMoves[randomIndex];
+        }
+      }
+      else if (difficulty === 'hard') {
+        // Use minimax algorithm for best possible move
+        movePosition = getBestMove(currentSquares.slice());
+      }
+
+      if (movePosition === null) return currentSquares;
+
       const nextState = currentSquares.slice();
       nextState[movePosition] = 'O';
       setLastMove({ position: movePosition, symbol: 'O' });
       
-      if (calcWinner(nextState)) {
+      const result = calcWinner(nextState);
+      if (result && result !== 'draw') {
         setShowWinAnimation(true);
       }
       
@@ -96,9 +187,10 @@ export default function Board() {
       setLastMove({ position: i, symbol: 'X' });
       setTurn(false);
       
-      if (calcWinner(nextState)) {
+      const result = calcWinner(nextState);
+      if (result && result !== 'draw') {
         setShowWinAnimation(true);
-      } else {
+      } else if (!result) {
         setTimeout(() => {
           if (!calcWinner(nextState)) {
             computerMove();
@@ -112,7 +204,8 @@ export default function Board() {
       setLastMove({ position: i, symbol: turn ? 'X' : 'O' });
       setTurn(!turn);
       
-      if (calcWinner(nextState)) {
+      const result = calcWinner(nextState);
+      if (result && result !== 'draw') {
         setShowWinAnimation(true);
       }
     }
@@ -139,8 +232,22 @@ export default function Board() {
         <ParticlesComponent id="particles" />
         <div id="mode-selection">
           <h2>Select Game Mode</h2>
-          <button onClick={() => setGameMode('single')}>Single Player</button>
           <button onClick={() => setGameMode('multi')}>Two Players</button>
+          <div className="single-player-options">
+            <h3>Single Player</h3>
+            <button onClick={() => {
+              setGameMode('single');
+              setDifficulty('easy');
+            }}>Easy</button>
+            <button onClick={() => {
+              setGameMode('single');
+              setDifficulty('medium');
+            }}>Medium</button>
+            <button onClick={() => {
+              setGameMode('single');
+              setDifficulty('hard');
+            }}>Hard</button>
+          </div>
         </div>
       </>
     );

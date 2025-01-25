@@ -268,3 +268,36 @@ h2 {
     opacity: 0;
   }
 }
+
+.single-player-options {
+  margin-top: 20px;
+}
+
+.single-player-options h3 {
+  color: #ffd33d;
+  font-size: 24px;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 2px slategrey;
+}
+
+.single-player-options button {
+  margin: 10px;
+  padding: 12px 25px;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: transparent;
+  color: #ffd33d;
+  border: 3px solid #ffd33d;
+  border-radius: 20px;
+  text-shadow: 2px 2px 2px black;
+  box-shadow: 2px 3px 3px slategray;
+  transition: all 0.3s ease;
+}
+
+.single-player-options button:hover {
+  background-color: #ffd33d;
+  color: black;
+  text-shadow: 2px 2px 2px slategray;
+  box-shadow: 2px 3px 3px #ffd33d;
+  transform: scale(1.05);
+}
