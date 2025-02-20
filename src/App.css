@@ -9,6 +9,7 @@ body {
   align-items: center;
   background-color: #25292e;
   flex-direction: column;
+  height: 98dvh;
   height: 98vh;
 }
 
@@ -59,7 +60,7 @@ h2 {
 
 .board-row {
   clear: both;
-  content: '';
+  content: "";
   display: table;
 }
 
@@ -211,7 +212,7 @@ h2 {
     transform: scale(1);
     opacity: 1;
   }
-  50%{
+  50% {
     transform: scale(1);
     opacity: 1;
     color: #fff;
@@ -259,8 +260,7 @@ h2 {
     opacity: 1;
   }
   100% {
-    transform: 
-      translate(
+    transform: translate(
         calc(var(--end-x) - var(--start-x)),
         calc(var(--end-y) - var(--start-y))
       )
